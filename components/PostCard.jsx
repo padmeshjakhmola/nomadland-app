@@ -37,6 +37,9 @@ const PostCard = ({ data }) => {
         </View>
         <View className="my-4">
           <View className="mb-1 space-y-5">
+            <Text className="text-lg font-nbold">
+              {`Kobe’s passing is really sticking with me in a way I didn’t expect.`}
+            </Text>
             <Text className="text-base font-nregular">
               {`Kobe’s passing is really sticking with me in a way I didn’t expect.\n\nHe was an icon, the kind of person who wouldn’t die this way. My wife compared it to Princess Di’s accident.`}
             </Text>

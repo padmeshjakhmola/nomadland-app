@@ -1,11 +1,53 @@
-import { View, Text, FlatList, Image, RefreshControl } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  RefreshControl,
+  ActivityIndicator,
+} from "react-native";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { icons, images } from "../../constants";
 import PostCard from "../../components/PostCard";
 import { dummyData } from "../../utils";
 
 const Home = () => {
+  const [displayedData, setDisplayedData] = useState([]);
+  const [pageLoading, setPageLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 10;
+
+  useEffect(() => {
+    loadMoreItems();
+  }, []);
+
+  const loadMoreItems = () => {
+    if (pageLoading) return;
+    setPageLoading(true);
+
+    // setTimeout(() => {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = page * itemsPerPage;
+    const newItems = dummyData.slice(startIndex, endIndex);
+
+    setDisplayedData([...displayedData, ...newItems]);
+    setPage(page + 1);
+    setPageLoading(false);
+    // }, 4000);
+  };
+
+  const renderFooter = () => {
+    if (!pageLoading) return null;
+    return (
+      <View style={{ padding: 10 }}>
+        <ActivityIndicator size="large" color="black" />
+      </View>
+    );
+  };
+
+  const renderItem = ({ item }) => <PostCard data={item} />;
+
   return (
     <SafeAreaView className="mt-4 pb-16 h-screen">
       <FlatList
@@ -34,12 +76,16 @@ const Home = () => {
           </>
         )}
         showsVerticalScrollIndicator={false}
-        data={dummyData}
-        renderItem={({ item }) => <PostCard data={item} />}
+        data={displayedData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        onEndReached={loadMoreItems}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={renderFooter}
         refreshControl={
           <RefreshControl
-            // refreshing={refreshing}
-            // onRefresh={onRefresh}
+          // refreshing={refreshing}
+          // onRefresh={onRefresh}
           />
         }
       />
