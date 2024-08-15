@@ -83,7 +83,7 @@ export default function App() {
         <View className="mb-[20px] flex-row justify-end">
           {currentSlideIndex != slides.length - 1 ? (
             <TouchableOpacity
-              className="flex-row space-x-2 justify-center items-center rounded-lg mr-2"
+              className="flex-row space-x-2 justify-center items-center rounded-lg mr-2 pl-5 pt-5"
               onPress={goNextSlide}
             >
               <Text className="font-mmedium">Next</Text>
@@ -95,7 +95,7 @@ export default function App() {
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
-              className="flex-row space-x-2 justify-center items-center rounded-lg mr-2"
+              className="flex-row space-x-2 justify-center items-center rounded-lg mr-2 pl-5 pt-5"
               onPress={() => {
                 router.replace("/home");
               }}
@@ -137,6 +137,7 @@ export default function App() {
         pagingEnabled
         scrollEnabled
         onMomentumScrollEnd={updateCurrentSlideIndex}
+        bounces={false}
       />
       <Footer />
     </SafeAreaView>
