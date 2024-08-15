@@ -13,6 +13,7 @@ import post5 from "../assets/images/post5.jpg";
 import post6 from "../assets/images/post6.jpg";
 import post7 from "../assets/images/post7.jpg";
 import post8 from "../assets/images/post8.jpg";
+import post9 from "../assets/images/post9.png";
 
 export default {
   person1,
@@ -30,4 +31,5 @@ export default {
   post6,
   post7,
   post8,
+  post9,
 };

@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image } from "react-native";
+import { View, Text, FlatList, Image, RefreshControl } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { icons, images } from "../../constants";
@@ -36,6 +36,12 @@ const Home = () => {
         showsVerticalScrollIndicator={false}
         data={dummyData}
         renderItem={({ item }) => <PostCard data={item} />}
+        refreshControl={
+          <RefreshControl
+            // refreshing={refreshing}
+            // onRefresh={onRefresh}
+          />
+        }
       />
     </SafeAreaView>
   );

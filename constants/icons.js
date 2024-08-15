@@ -11,6 +11,7 @@ import messages from "../assets/icons/messages.png";
 import notification from "../assets/icons/notification.png";
 import rightDoubleArrow from "../assets/icons/right-double-arrow.png";
 import search from "../assets/icons/search.png";
+import more from "../assets/icons/more.png";
 
 export default {
   closeImage,
@@ -26,4 +27,5 @@ export default {
   notification,
   rightDoubleArrow,
   search,
+  more,
 };
