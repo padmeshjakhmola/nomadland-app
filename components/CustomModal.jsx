@@ -21,6 +21,7 @@ const CustomModal = ({ isVisible, onClose, postPicture }) => {
       onBackdropPress={onClose}
       animationIn="slideInUp"
       animationInTiming={300}
+      coverScreen={true}
       className="m-0 justify-end"
     >
       <View className="bg-black rounded-3xl h-full">
