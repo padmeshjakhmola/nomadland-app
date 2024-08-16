@@ -12,6 +12,7 @@ import notification from "../assets/icons/notification.png";
 import rightDoubleArrow from "../assets/icons/right-double-arrow.png";
 import search from "../assets/icons/search.png";
 import more from "../assets/icons/more.png";
+import backarrow from "../assets/icons/backarrow.png";
 
 export default {
   closeImage,
@@ -28,4 +29,5 @@ export default {
   rightDoubleArrow,
   search,
   more,
+  backarrow,
 };

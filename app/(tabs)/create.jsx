@@ -14,6 +14,7 @@ import FormField from "../../components/FormField";
 import { icons, images } from "../../constants";
 import * as DocumentPicker from "expo-document-picker";
 import * as Location from "expo-location";
+import { router } from "expo-router";
 
 const Create = () => {
   const [form, setForm] = useState({
@@ -108,7 +109,14 @@ const Create = () => {
         className="flex-1"
         keyboardVerticalOffset={Platform.OS === "ios" ? 10 : 0}
       >
-        <View className="flex-row justify-end pt-2">
+        <View className="flex-row items-center justify-between pt-2">
+          <TouchableOpacity onPress={() => router.back()}>
+            <Image
+              source={icons.backarrow}
+              className="w-8 h-8"
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
           <TouchableOpacity onPress={handleSubmit}>
             <View className="bg-red-1 rounded-xl p-3 px-6">
               <Text className="text-white font-mbold">Post</Text>
