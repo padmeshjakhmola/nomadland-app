@@ -13,6 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import { icons, images } from "../../constants";
 import * as DocumentPicker from "expo-document-picker";
+import * as Location from "expo-location";
 
 const Create = () => {
   const [form, setForm] = useState({
@@ -22,6 +23,8 @@ const Create = () => {
   });
   const [showImage, setShowImage] = useState(null);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+  const [showLocation, setShowLocation] = useState(false);
+  const [address, setAddress] = useState(null);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -53,6 +56,28 @@ const Create = () => {
     setShowImage(false);
   };
 
+  const handleRemoveLocation = () => {
+    setAddress(null);
+  };
+
+  const handleLocation = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert("Please grant Location permission");
+      return;
+    }
+
+    let currentLocation = await Location.getCurrentPositionAsync();
+
+    const reverseGeoCodeAddress = await Location.reverseGeocodeAsync({
+      latitude: currentLocation.coords.latitude,
+      longitude: currentLocation.coords.longitude,
+    });
+
+    setAddress(reverseGeoCodeAddress);
+    setShowLocation(!showLocation);
+  };
+
   const openPicker = async (selectType) => {
     const result = await DocumentPicker.getDocumentAsync({
       type:
@@ -67,7 +92,7 @@ const Create = () => {
           ...form,
           picture: result.assets[0],
         });
-        setShowImage(true)
+        setShowImage(true);
       }
     } else {
       setTimeout(() => {
@@ -94,17 +119,17 @@ const Create = () => {
           placeholder="Title"
           value={form.title}
           handleChangeText={(e) => setForm({ ...form, title: e })}
+          maxLength={30}
         />
         <FormField
           placeholder="Create a post description!"
           value={form.description}
           handleChangeText={(e) => setForm({ ...form, description: e })}
+          maxLength={100}
         />
-        {/* {showImage && ( */}
         {form.picture && showImage && (
           <View className="w-full max-h-60 rounded-xl mt-6">
             <Image
-              // source={images.post3}
               source={{ uri: form.picture.uri }}
               className="w-full h-full rounded-3xl"
               resizeMethod="contain"
@@ -122,22 +147,55 @@ const Create = () => {
             </TouchableOpacity>
           </View>
         )}
+        {showLocation && (
+          <View className="flex-row items-center my-3 justify-between">
+            <View className="flex-row items-center gap-2">
+              <Image
+                source={icons.location}
+                className="w-6 h-6"
+                resizeMode="contain"
+                tintColor="#0076d3"
+              />
+              <Text className="font-mbold text-blue-1">
+                {`${address[0]?.district}, ${address[0]?.city}, ${address[0]?.country}`}
+              </Text>
+            </View>
+          </View>
+        )}
         <View className="flex-1 justify-end">
           {isKeyboardVisible && (
             <View className="flex-row space-x-4">
-              <TouchableOpacity>
-                <Image
-                  source={icons.location}
-                  className="w-6 h-6"
-                  resizeMode="contain"
-                />
+              <TouchableOpacity onPress={handleLocation}>
+                {showLocation ? (
+                  <Image
+                    source={icons.location}
+                    className="w-6 h-6"
+                    resizeMode="contain"
+                    tintColor="#0076d3"
+                  />
+                ) : (
+                  <Image
+                    source={icons.location}
+                    className="w-6 h-6"
+                    resizeMode="contain"
+                  />
+                )}
               </TouchableOpacity>
               <TouchableOpacity onPress={() => openPicker("image")}>
-                <Image
-                  source={icons.gallary}
-                  className="w-6 h-6"
-                  resizeMode="contain"
-                />
+                {showImage ? (
+                  <Image
+                    source={icons.gallary}
+                    className="w-6 h-6"
+                    resizeMode="contain"
+                    tintColor="#E60023"
+                  />
+                ) : (
+                  <Image
+                    source={icons.gallary}
+                    className="w-6 h-6"
+                    resizeMode="contain"
+                  />
+                )}
               </TouchableOpacity>
             </View>
           )}

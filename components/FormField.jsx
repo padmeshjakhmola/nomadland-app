@@ -8,25 +8,24 @@ const FormField = ({
   handleChangeText,
   otherStyles,
   border,
+  maxLength,
   ...props
 }) => {
   return (
     <View className={`space-y-2 ${otherStyles}`}>
       <Text className="text-base text-black font-mmedium">{title}</Text>
-      {/* <View className="w-full h-16 px-4 rounded-2xl border-2 border-black-200 focus:border-red-1 flex flex-row items-center"> */}
       <View
         className={`w-full h-10 rounded-2xl flex flex-row items-center ${
           border && "border-2 border-black-200 focus:border-red-1 h-16 px-4"
         }`}
       >
         <TextInput
-          className="flex-1 text-gray-400 font-mmedium text-base"
+          className="flex-1 text-black font-mmedium text-base"
           value={value}
-          //   value="Email"
           placeholder={placeholder}
-          //   placeholder="Input text"
           placeholderTextColor="#7B7B8B"
           onChangeText={handleChangeText}
+          maxLength={maxLength}
           //   secureTextEntry={title === "Password" && !showPassword}
           {...props}
         />
