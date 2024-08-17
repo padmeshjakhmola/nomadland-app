@@ -7,12 +7,14 @@ import {
   View,
   ScrollView,
   Dimensions,
+  Image,
 } from "react-native";
 import React, { useCallback, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { useGlobalContext } from "../../context/GlobalProvider";
+import { icons } from "../../constants";
 
 export default function SignIn() {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -50,11 +52,16 @@ export default function SignIn() {
     <SafeAreaView className="h-full">
       <ScrollView>
         <View
-          className="w-full px-6 flex justify-center"
+          className="w-full px-6 flex justify-center items-center"
           style={{
             minHeight: Dimensions.get("window").height - 100,
           }}
         >
+          <Image
+            source={icons.logo}
+            className="w-16 h-16 mb-10"
+            resizeMode="contain"
+          />
           <FormField
             value={emailAddress}
             placeholder="Email"
@@ -69,7 +76,7 @@ export default function SignIn() {
           />
           <CustomButton
             title="Sign In"
-            containerStyles="my-8"
+            containerStyles="my-8 w-full"
             handlePress={onSignInPress}
           />
           <View className="flex-row items-center justify-center space-x-1">

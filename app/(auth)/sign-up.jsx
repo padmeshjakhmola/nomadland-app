@@ -6,12 +6,14 @@ import {
   ScrollView,
   Dimensions,
   Text,
+  Image,
 } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
+import { icons } from "../../constants";
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -78,11 +80,16 @@ export default function SignUpScreen() {
     <SafeAreaView className="h-full">
       <ScrollView>
         <View
-          className="w-full px-6 flex justify-center"
+          className="w-full px-6 flex justify-center items-center"
           style={{
             minHeight: Dimensions.get("window").height - 100,
           }}
         >
+          <Image
+            source={icons.logo}
+            className="w-16 h-16 mb-10"
+            resizeMode="contain"
+          />
           {!pendingVerification && (
             <>
               <FormField
@@ -117,7 +124,7 @@ export default function SignUpScreen() {
               />
               <CustomButton
                 title="Sign Up"
-                containerStyles="my-8"
+                containerStyles="my-8 w-full"
                 handlePress={onSignUpPress}
               />
             </>

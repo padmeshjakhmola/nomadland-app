@@ -14,6 +14,8 @@ import search from "../assets/icons/search.png";
 import more from "../assets/icons/more.png";
 import backarrow from "../assets/icons/backarrow.png";
 import logout from "../assets/icons/logout.png";
+import eye from "../assets/icons/eye.png";
+import eyehide from "../assets/icons/eye-hide.png";
 
 export default {
   closeImage,
@@ -32,4 +34,6 @@ export default {
   more,
   backarrow,
   logout,
+  eye,
+  eyehide,
 };
