@@ -27,6 +27,7 @@ const FormField = ({
           onChangeText={handleChangeText}
           maxLength={maxLength}
           //   secureTextEntry={title === "Password" && !showPassword}
+          secureTextEntry={placeholder === "Password"}
           {...props}
         />
       </View>

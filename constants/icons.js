@@ -13,6 +13,7 @@ import rightDoubleArrow from "../assets/icons/right-double-arrow.png";
 import search from "../assets/icons/search.png";
 import more from "../assets/icons/more.png";
 import backarrow from "../assets/icons/backarrow.png";
+import logout from "../assets/icons/logout.png";
 
 export default {
   closeImage,
@@ -30,4 +31,5 @@ export default {
   search,
   more,
   backarrow,
+  logout,
 };

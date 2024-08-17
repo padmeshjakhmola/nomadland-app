@@ -8,6 +8,7 @@ import {
 import React, { useState } from "react";
 import { images } from "../constants";
 import CustomModal from "./CustomModal";
+import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY } from "react-native-dotenv";
 
 const PostCard = ({ data }) => {
   const [isModalVisible, setModalVisible] = useState(false);

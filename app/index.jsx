@@ -97,7 +97,7 @@ export default function App() {
             <TouchableOpacity
               className="flex-row space-x-2 justify-center items-center rounded-lg mr-2 pl-5 pt-5"
               onPress={() => {
-                router.replace("/home");
+                router.replace("/sign-in");
               }}
             >
               <Text className="font-mmedium">Sign up or Sign in</Text>

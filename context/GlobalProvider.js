@@ -5,7 +5,7 @@ import { router } from "expo-router";
 const GlobalContext = createContext();
 export const useGlobalContext = () => useContext(GlobalContext);
 const GlobalProvider = ({ children }) => {
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

@@ -5,12 +5,16 @@ import {
   Image,
   RefreshControl,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { icons, images } from "../../constants";
 import PostCard from "../../components/PostCard";
 import { dummyData } from "../../utils";
+import { SignedOut } from "@clerk/clerk-expo";
+import { SignOutButton, useAuth } from "@clerk/clerk-react";
+import { router } from "expo-router";
 
 const Home = () => {
   const [displayedData, setDisplayedData] = useState([]);
@@ -48,6 +52,12 @@ const Home = () => {
 
   const renderItem = ({ item }) => <PostCard data={item} />;
 
+  const handleSignout = () => {
+    router.push("/");
+  };
+
+  const { signOut } = useAuth();
+
   return (
     <SafeAreaView className="mt-4 pb-16 h-screen">
       <FlatList
@@ -64,13 +74,18 @@ const Home = () => {
                 className="w-9 h-9 rounded-full"
                 resizeMode="cover"
               />
-              <View className="rounded-full p-2 border border-gray-300">
-                <Image
-                  source={icons.notification}
-                  className="w-6 h-6"
-                  resizeMode="contain"
-                />
-              </View>
+              <SignOutButton>
+                {/* <TouchableOpacity onPress={handleSignout}> */}
+                <TouchableOpacity onPress={() => signOut(router.replace("/sign-in"))}>
+                  <View className="rounded-full p-2 border border-gray-300">
+                    <Image
+                      source={icons.logout}
+                      className="w-6 h-6"
+                      resizeMode="contain"
+                    />
+                  </View>
+                </TouchableOpacity>
+              </SignOutButton>
             </View>
             <View className="border-solid border border-gray-200 my-2" />
           </>
