@@ -8,8 +8,9 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { icons, images } from "../constants";
-import { useRef, useState } from "react";
-import { router } from "expo-router";
+import { useEffect, useRef, useState } from "react";
+import { Redirect, router } from "expo-router";
+import { useAuth } from "@clerk/clerk-expo";
 
 const { width, height } = Dimensions.get("window");
 
@@ -38,6 +39,10 @@ const slides = [
 ];
 
 const Slide = ({ item }) => {
+  const { isSignedIn } = useAuth();
+
+  if (isSignedIn) return <Redirect href="/home" />;
+
   return (
     <View className="items-center justify-center">
       <Image
@@ -125,6 +130,7 @@ export default function App() {
       setCurrentSlideIndex(nextSlideIndex);
     }
   };
+
   return (
     <SafeAreaView className="flex-1 h-full">
       <FlatList

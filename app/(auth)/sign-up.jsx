@@ -30,22 +30,6 @@ export default function SignUpScreen() {
       return;
     }
 
-    //   try {
-    //     await signUp.create({
-    //       emailAddress,
-    //       password,
-    //     });
-
-    //     await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-
-    //     setPendingVerification(true);
-    //   } catch (err) {
-    //     // See https://clerk.com/docs/custom-flows/error-handling
-    //     // for more info on error handling
-    //     console.error(JSON.stringify(err, null, 2));
-    //   }
-    // };
-
     try {
       await signUp.create({
         firstName,
@@ -79,7 +63,7 @@ export default function SignUpScreen() {
 
       if (completeSignUp.status === "complete") {
         await setActive({ session: completeSignUp.createdSessionId });
-        router.replace("/home");
+        setIsLogged(true);
       } else {
         console.error(JSON.stringify(completeSignUp, null, 2));
       }
@@ -93,24 +77,6 @@ export default function SignUpScreen() {
   return (
     <SafeAreaView className="h-full">
       <ScrollView>
-        {/* {!pendingVerification && (
-        <>
-          <TextInput
-            autoCapitalize="none"
-            value={emailAddress}
-            placeholder="Email..."
-            onChangeText={(email) => setEmailAddress(email)}
-          />
-          <TextInput
-            value={password}
-            placeholder="Password..."
-            secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)}
-          />
-          <Button title="Sign Up" onPress={onSignUpPress} />
-        </>
-      )} */}
-
         <View
           className="w-full px-6 flex justify-center"
           style={{
@@ -182,17 +148,6 @@ export default function SignUpScreen() {
             </Link>
           </View>
         </View>
-
-        {/* {pendingVerification && (
-        <>
-          <TextInput
-            value={code}
-            placeholder="Code..."
-            onChangeText={(code) => setCode(code)}
-          />
-          <Button title="Verify Email" onPress={onPressVerify} />
-        </>
-      )} */}
       </ScrollView>
     </SafeAreaView>
   );

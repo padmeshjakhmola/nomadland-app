@@ -1,7 +1,9 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
 import { icons } from "../../constants";
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
+import { useGlobalContext } from "../../context/GlobalProvider";
+import { useAuth } from "@clerk/clerk-expo";
 
 const TabIcon = ({ icon, color, name, focused, imageSize, tintcolor }) => {
   return (
@@ -17,6 +19,10 @@ const TabIcon = ({ icon, color, name, focused, imageSize, tintcolor }) => {
 };
 
 const TabsLayout = () => {
+  const { isSignedIn } = useAuth();
+
+  if (!isSignedIn) return <Redirect href="/sign-in" />;
+
   return (
     <Tabs
       screenOptions={{

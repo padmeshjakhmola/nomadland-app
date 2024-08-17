@@ -52,10 +52,6 @@ const Home = () => {
 
   const renderItem = ({ item }) => <PostCard data={item} />;
 
-  const handleSignout = () => {
-    router.push("/");
-  };
-
   const { signOut } = useAuth();
 
   return (
@@ -64,28 +60,35 @@ const Home = () => {
         ListHeaderComponent={() => (
           <>
             <View className="px-6 flex-row justify-between items-center">
-              <Image
-                source={images.profile}
-                className="w-8 h-8 rounded-full"
-                resizeMode="cover"
-              />
-              <Image
-                source={icons.logo}
-                className="w-9 h-9 rounded-full"
-                resizeMode="cover"
-              />
-              <SignOutButton>
-                {/* <TouchableOpacity onPress={handleSignout}> */}
-                <TouchableOpacity onPress={() => signOut(router.replace("/sign-in"))}>
-                  <View className="rounded-full p-2 border border-gray-300">
-                    <Image
-                      source={icons.logout}
-                      className="w-6 h-6"
-                      resizeMode="contain"
-                    />
-                  </View>
-                </TouchableOpacity>
-              </SignOutButton>
+              <View className="flex-1">
+                <Image
+                  source={images.profile}
+                  className="w-8 h-8 rounded-full"
+                  resizeMode="cover"
+                />
+              </View>
+              <View className="flex-1 items-center">
+                <Image
+                  source={icons.logo}
+                  className="w-9 h-9 rounded-full"
+                  resizeMode="cover"
+                />
+              </View>
+              <View className="flex-1 items-end">
+                <SignOutButton>
+                  <TouchableOpacity
+                    onPress={() => signOut(router.replace("/sign-in"))}
+                  >
+                    <View className="rounded-full p-2 border border-gray-300">
+                      <Image
+                        source={icons.logout}
+                        className="w-6 h-6"
+                        resizeMode="contain"
+                      />
+                    </View>
+                  </TouchableOpacity>
+                </SignOutButton>
+              </View>
             </View>
             <View className="border-solid border border-gray-200 my-2" />
           </>

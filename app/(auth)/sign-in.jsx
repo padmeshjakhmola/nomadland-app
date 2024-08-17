@@ -35,7 +35,6 @@ export default function SignIn() {
 
       if (signInAttempt.status === "complete") {
         await setActive({ session: signInAttempt.createdSessionId });
-        router.replace("/home");
         setIsLogged(true);
       } else {
         // See https://clerk.com/docs/custom-flows/error-handling
@@ -50,18 +49,6 @@ export default function SignIn() {
   return (
     <SafeAreaView className="h-full">
       <ScrollView>
-        {/* <TextInput
-        autoCapitalize="none"
-        value={emailAddress}
-        placeholder="Email..."
-        onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
-      />
-      <TextInput
-        value={password}
-        placeholder="Password..."
-        secureTextEntry={true}
-        onChangeText={(password) => setPassword(password)}
-      /> */}
         <View
           className="w-full px-6 flex justify-center"
           style={{
@@ -80,8 +67,6 @@ export default function SignIn() {
             handleChangeText={(password) => setPassword(password)}
             border={true}
           />
-          {/* <Button title="Sign In" onPress={onSignInPress} />
-           */}
           <CustomButton
             title="Sign In"
             containerStyles="my-8"
@@ -95,6 +80,11 @@ export default function SignIn() {
               <Text className="font-nbold text-red-1 text-base">Sign up</Text>
             </Link>
           </View>
+          {/* <Link href="/home">
+            <Text className="font-nbold text-red-1 text-base">
+              Redirect home---temp
+            </Text>
+          </Link> */}
         </View>
       </ScrollView>
     </SafeAreaView>
